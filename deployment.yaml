@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 20
+  selector:
+    matchExpressions:
+    - {key: app, operator: In, values: [nginx-app, demo-app]}
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - name: mynginx-con
+        image: nginx:1.21.0.asdfasdf
+        ports:
+        - containerPort: 80
+        imagePullPolicy: IfNotPresent
+  strategy:
+    type: Recreate
