@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+  labels:
+    name: test-pd
+spec:
+  containers:
+  - name: test-container
+    image: nginx
+    volumeMounts:
+    - name:  test-volume
+      mountPath:  /etc/data
+    - name:  test-volume2
+      mountPath:  /etc/data2
+  volumes:
+  - name:  test-volume
+    hostPath:
+        path:  /data
+        type: DirectoryOrCreate
+  - name:  test-volume2
+    hostPath:
+        path:  /data2
+        type: DirectoryOrCreate 
