@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+  labels:
+    name: configmap-pod
+spec:
+  containers:
+  - name: configmap-pod
+    image: nginx
+    volumeMounts:
+    - name: config-vol
+      mountPath: "/data"
+      readOnly: true
+  volumes:
+  - name:  config-vol
+    configMap:
+      name: mysettings-config4
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysettings-config4
+  namespace: default
+  labels:
+    app: mysettings-config4
+data:
+  mysettings.json: "{\"name\":\"Balaji\",\"location\":\"Hyderabad\"}"
+
