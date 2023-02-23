@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: nginx
+    volumeMounts:
+      - name:  azure
+        mountPath:  /officelicenseissue
+  volumes:
+    - name:  azure
+      azureFile:
+        secretName: azure-storage-secret
+        shareName: azaksfile
+        readOnly: false
